@@ -1,0 +1,10 @@
+<div class="video-container, center" *ngIf="!error" >
+  <video  #video id="video" [width]="WIDTH" [height]="HEIGHT" [hidden]="true"
+         autoplay></video>
+  <canvas  #canvas id="canvas" [width]="WIDTH" [height]="HEIGHT"></canvas>
+</div>
+
+
+
+
+<canvas  #canvasConverter id="canvasConverter" [hidden]="true" [width]="WIDTH" [height]="HEIGHT"></canvas>

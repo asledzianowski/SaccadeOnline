@@ -1,0 +1,65 @@
+.snap-container {
+  margin-top: 16px;
+  margin-bottom: 16px;
+  text-align: center;
+}
+
+.list-unstyled {
+  list-style: none;
+}
+
+.list-unstyled li {
+  display: inline-block;
+  padding: 5px 10px;
+  cursor: pointer;
+}
+
+.experimentCanvasDiv{
+  cursor: none;
+}
+
+.show {
+  display: block;
+}
+
+.hide {
+  display: none;
+}
+
+.center {
+  display: flex;
+  justify-content: center;
+  background-color: gray !important;
+  text-align: center;
+}
+
+.vertical-center {
+  vertical-align: middle;
+}
+
+.grayback {
+  background-color: gray !important;
+ }
+
+ .header{
+  font-family:tahoma; font-size: 18pt; font-weight:500; color:#006600;
+  padding-top:10px; height: 50px;
+  background: linear-gradient(180deg, rgba(160,160,160,1) 0%, rgba(128,128,128,1) 100%);
+
+}
+
+.text-white{
+  font-family:tahoma; font-size: 18pt; font-weight:500; color:#ffffff;
+}
+
+.text-white-small{
+  font-family:tahoma; font-size: 12pt; font-weight:500; color:#ffffff;
+}
+
+.logo-font{
+
+  color:#4cae4c;
+  text-shadow: -1px 0 #006600, 0 1px #006600, 1px 0 #006600, 0 -1px #006600;
+  font-family:tahoma; font-size: 16pt; font-weight:bold;
+}
+

@@ -1,0 +1,7 @@
+{
+  "/api/*": {
+      "target": "https://brainonline.pja.edu.pl:8080",
+      "secure": false,
+      "logLevel": "info"
+  }
+}

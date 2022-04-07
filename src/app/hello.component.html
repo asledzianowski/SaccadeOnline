@@ -1,0 +1,65 @@
+
+
+
+
+  <div class="center, header" style="background-color: gray;">
+    <img [src]='pjatkSrc' style="height: 40px; width: 150px; margin: auto;">
+
+  </div>
+  <div style="margin-right: auto; margin-left: auto; text-align: center;
+  font-family:tahoma; font-size: 16pt; font-weight:500; background-color: gray;
+  height: 50px;">
+    <img [src]='logoSrc' style="height: 40px; width: 40px; margin-right: auto; margin-left: auto; text-align: center;">
+    <div style="display: inline-block; vertical-align:bottom; padding-left: 2px; font-weight: bold;" class="logo-font">Badanie Okulometryczne On-Line</div>
+  </div>
+  <div style="background-color: gray; ">
+    <div style="width: 400px; margin-left: auto; margin-right: auto; background-color: gray;">
+      <div>
+        <img [src]='eyeSrc' style="width: 400px; margin: auto;">
+      </div>
+
+      <input type="button" value="Rozpocznij" [routerLink]="'/camera'" class="btn btn-success"
+      style="width: 400px; margin-top: 5px;" />
+      <input type="button" value="Pokaż Instrukcję" (click)='toogleInstruction()' class="btn btn-success"
+      style="width: 400px; margin-top: 5px;" />
+            <!-- style="font-size : 20px; width: 400px; background-color: rgb(138, 138, 138);
+            cursor: pointer; padding: 5px; color: #006600; border: 1px solid #006600;
+            text-align: center;"/> -->
+      <div style="color: white; padding-top: 10px; font-size : 16px; padding-left: 5px;
+      overflow: auto; height: 300px; width: 430px; padding-right: 10px;"
+      [style.display]="showInstruction ? 'block' : 'none'">
+        <p class="font-weight-bold">Instrukcja:</p>
+
+        <p class="font-weight-bold text-justify"><span class="badge badge-pill badge-success">1</span>
+          Po naciśnięciu guzika rozpocznij badanie zobaczysz pytanie przeglądarki o
+          pozwolenie na uruchomienie kamery.</p>
+
+          <img [src]='cameraAllowAccessSrc' style="width: 400px; margin: auto; padding-bottom: 10px;">
+
+        <p class="font-weight-bold text-justify"> Naciśnij "Zezwól" aby tej udzielić zgody.
+          Dostęp do kamery jest niezbędny do wykonania badania. Nie utrwalamy i nie przechowujemy nagrań wideo.
+         Służą one jedynie do estymacji elementów twarzy, oczu oraz kierunku padania Twojego wzroku w trakcie badania.
+         Zapis koordynatów jest anonimizowany i nikt nie jest w stanie go z Toba powiązać.</p>
+
+         <p class="font-weight-bold text-justify"><span class="badge badge-pill badge-success">2</span>
+          Po udzieleniu zezwolenia pojawi się ekran pozycjonowania. Przed rozpoczęciem badania
+          postaraj się zadbać o odpowiednio mocne oświetlenie, w kadże może znajdować się kilka twarzy
+          jednak w badaniu weźmie udział tylko ta oznaczona markerami na podglądzie.
+          Usiądź wygodnie i postaraj się usztywnić głowę np. opierająćją o oparcie fotela.
+          Nastęnie postępuj zgodnie ze wskazówkami widocznymi na podglądzie z kamery:
+
+        </p>
+        <p class="font-weight-bold text-justify"> Przybliż się do ekranu</p>
+        <p class="font-weight-bold text-justify"> Oddal się od ekranu</p>
+        <p class="font-weight-bold text-justify"> Twoja głowa jest przekrzywiona na bok,
+          postaraj się ułożyć ją prostopadle do ekranu
+        </p>
+
+        <p class="font-weight-bold text-justify"> Jeżeli postępowałeś zgodnie ze wskazówkami,
+           finalnie powinieneś ujrzeć komunikat 'DOBRZE', taki jak widoczny na obrazie poniżej :</p>
+      </div>
+    </div>
+
+  </div>
+
+

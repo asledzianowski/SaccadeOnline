@@ -1,0 +1,41 @@
+.snap-container {
+  margin-top: 16px;
+  margin-bottom: 16px;
+  text-align: center;
+}
+
+.list-unstyled {
+  list-style: none;
+}
+
+.list-unstyled li {
+  display: inline-block;
+  padding: 5px 10px;
+  cursor: pointer;
+}
+
+.show {
+  display: block;
+}
+
+.hide {
+  display: none;
+}
+
+.center {
+  display: flex;
+  justify-content: center;
+  background-color: gray !important;
+}
+
+.vertical-center {
+  margin: 0;
+  position: absolute;
+  top: 50%;
+  -ms-transform: translateY(-50%);
+  transform: translateY(-50%);
+}
+
+.grayback {
+  background-color: gray !important;
+ }
