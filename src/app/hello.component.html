@@ -28,36 +28,59 @@
       <div style="color: white; padding-top: 10px; font-size : 16px; padding-left: 5px;
       overflow: auto; height: 300px; width: 430px; padding-right: 10px;"
       [style.display]="showInstruction ? 'block' : 'none'">
-        <p class="font-weight-bold">Instrukcja:</p>
 
-        <p class="font-weight-bold text-justify"><span class="badge badge-pill badge-success">1</span>
-          Po naciśnięciu guzika rozpocznij badanie zobaczysz pytanie przeglądarki o
-          pozwolenie na uruchomienie kamery.</p>
+
+
+        <p class="font-weight-bold text-justify"><span class="badge badge-pill badge-success">1</span> <b> Uruchomienie Kamery</b></p>
+        <p> Po naciśnięciu guzika "Rozpocznij" zobaczysz pytanie przeglądarki o pozwolenie na uruchomienie kamery.</p>
 
           <img [src]='cameraAllowAccessSrc' style="width: 400px; margin: auto; padding-bottom: 10px;">
 
-        <p class="font-weight-bold text-justify"> Naciśnij "Zezwól" aby tej udzielić zgody.
+        <p class="font-weight-bold text-justify"> Naciśnij "Zezwól" / "Allow" (w zależności od wersji językowej) aby tej udzielić zgody.
           Dostęp do kamery jest niezbędny do wykonania badania. Nie utrwalamy i nie przechowujemy nagrań wideo.
          Służą one jedynie do estymacji elementów twarzy, oczu oraz kierunku padania Twojego wzroku w trakcie badania.
          Zapis koordynatów jest anonimizowany i nikt nie jest w stanie go z Toba powiązać.</p>
 
-         <p class="font-weight-bold text-justify"><span class="badge badge-pill badge-success">2</span>
-          Po udzieleniu zezwolenia pojawi się ekran pozycjonowania. Przed rozpoczęciem badania
+         <p class="font-weight-bold text-justify"><span class="badge badge-pill badge-success">2</span><b> Pozycjonowanie</b></p>
+         <p> Po udzieleniu zezwolenia pojawi się ekran pozycjonowania. Przed rozpoczęciem badania
           postaraj się zadbać o odpowiednio mocne oświetlenie, w kadże może znajdować się kilka twarzy
           jednak w badaniu weźmie udział tylko ta oznaczona markerami na podglądzie.
           Usiądź wygodnie i postaraj się usztywnić głowę np. opierająćją o oparcie fotela.
           Nastęnie postępuj zgodnie ze wskazówkami widocznymi na podglądzie z kamery:
 
         </p>
+        <img [src]='przyblizSrc' style="width: 400px; margin: auto; padding-bottom: 10px;">
         <p class="font-weight-bold text-justify"> Przybliż się do ekranu</p>
+        <img [src]='oddalSrc' style="width: 400px; margin: auto; padding-bottom: 10px;">
         <p class="font-weight-bold text-justify"> Oddal się od ekranu</p>
+        <img [src]='wyprostujSrc' style="width: 400px; margin: auto; padding-bottom: 10px;">
         <p class="font-weight-bold text-justify"> Twoja głowa jest przekrzywiona na bok,
           postaraj się ułożyć ją prostopadle do ekranu
         </p>
 
         <p class="font-weight-bold text-justify"> Jeżeli postępowałeś zgodnie ze wskazówkami,
            finalnie powinieneś ujrzeć komunikat 'DOBRZE', taki jak widoczny na obrazie poniżej :</p>
-      </div>
+           <img [src]='dobrzeSrc' style="width: 400px; margin: auto; padding-bottom: 10px;">
+
+           <p class="font-weight-bold text-justify"><span class="badge badge-pill badge-success">3</span><b> Przygotowanie do badania</b></p>
+          <p>Postaraj się nie zmieniać ułożenia głowy podczas trwania całego badania.
+          Możesz to sobie ułatwić np. opierając głowę o zagłówek fotela.
+          Postaraj się nie zmieniać takiego ułożenia głowy podczas trwania całego badania.</p>
+
+          <p>Jeżeli będziesz gotowy, naciśnij spację żeby rozpocząć badanie</p>
+
+          <p class="font-weight-bold text-justify"><span class="badge badge-pill badge-success">4</span><b> Przebieg badania</b></p>
+          <p>Badanie polega na obserwacji zielonego punktu który pojawi się na ekranie.
+            <img [src]='pointSrc' style="width: 400px; margin: auto; padding-bottom: 10px;">
+            Twoim jedynym zadaniem będzie przesuwanie wzroku za zmieniającym pozycję zielonym punktem.</p>
+
+            <p class="font-weight-bold text-justify"><span class="badge badge-pill badge-success">4</span><b> Wyniki badania</b></p>
+
+            <p>Po zakończeniu badania, koniecznym będzie poczekanie ok. 10-20 sekund na obliczenia,
+            po czym pojawią się wyniki badania:</p>
+
+            <img [src]='wynikiSrc' style="width: 400px; margin: auto; padding-bottom: 10px;">
+        </div>
     </div>
 
   </div>

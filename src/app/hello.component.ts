@@ -12,6 +12,12 @@ export class HelloComponent  {
   pjatkSrc = "../assets/pjatk_2.png"
   eyeSrc = "../assets/eye_1.png"
   cameraAllowAccessSrc = "../assets/camera_allow_access.jpg"
+  przyblizSrc = "../assets/przybliz.jpg"
+  oddalSrc = "../assets/oddal.jpg"
+  wyprostujSrc = "../assets/wyprostuj.jpg"
+  dobrzeSrc = "../assets/dobrze.jpg"
+  pointSrc = "../assets/point.jpg"
+  wynikiSrc = "../assets/wyniki.jpg"
   showInstruction: boolean = false;
 
   toogleInstruction()
