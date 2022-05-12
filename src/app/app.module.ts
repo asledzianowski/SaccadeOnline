@@ -6,6 +6,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from "./app.component";
 import { HelloComponent } from "./hello.component";
 import { CameraComponent } from "./camera.component";
+import { FormComponent } from "./form.component";
 import { WebcamSnapshotModule } from "./webcam-snapshot/webcam-snapshot.module";
 
 
@@ -15,7 +16,7 @@ import { WebcamSnapshotModule } from "./webcam-snapshot/webcam-snapshot.module";
     HttpClientModule,
     AppRoutingModule,
     WebcamSnapshotModule],
-  declarations: [AppComponent, HelloComponent, CameraComponent],
+  declarations: [AppComponent, HelloComponent, CameraComponent, FormComponent],
   bootstrap: [AppComponent]
 })
 export class AppModule {}

@@ -18,6 +18,7 @@ export class DataCollectorService
   private experimentData:Array<any> = [];
   public get ExperimentData(): Array<any> {return this.experimentData};
 
+  public formData: object;
 
   constructor(private dataService: DataService) {}
 
@@ -79,7 +80,7 @@ export class DataCollectorService
     return new Promise((resolve, reject) => {
 
       this.dataService.postResultsData(this.calibrationData, this.experimentData, distanceFromScreen,
-        screenResolution, screenWidthMM).subscribe((data: any[])=>{
+        screenResolution, screenWidthMM, this.formData).subscribe((data: any[])=>{
 
         console.log("RESULTS RECEIVED FROM API:")
         console.log("Estimation Data:")

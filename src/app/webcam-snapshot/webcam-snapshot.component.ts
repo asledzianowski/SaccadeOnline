@@ -11,7 +11,7 @@ export enum State {CONFIG,CALIBRATION,EXPERIMENT,RESULTS}
   selector: "app-webcam-snapshot",
   templateUrl: "./webcam-snapshot.component.html",
   styleUrls: ["./webcam-snapshot.component.scss"],
-  host: {'(window:resize)': 'onResize($event)'}											   
+  host: {'(window:resize)': 'onResize($event)'}
 })
 export class WebcamSnapshotComponent implements AfterViewInit {
 
@@ -82,7 +82,7 @@ export class WebcamSnapshotComponent implements AfterViewInit {
   fps : string ;
 
   public distFromScreenInCm: number = 86;
-  public targetToFixDistanceInDeg: number = 5;												  												
+  public targetToFixDistanceInDeg: number = 5;
 
   constructor(private drawingService : DrawingService, private videoService : VideoService,
     private stimuliService : StimuliService, private dataCollectorService : DataCollectorService,
@@ -113,7 +113,7 @@ onResize(event){
     this.setUpConfigState();
     //UNCOMMENT FOR TESTS
     //this.testResultPanel();
-  
+
     this.documentElement = document.documentElement;
     this.document = document;
 
@@ -135,7 +135,7 @@ onResize(event){
 
     // define drawing defaults
 	console.log("window.innerWidth CM", (window.innerWidth / 96) * 2.54)
-    console.log("window.innerWidth MM", Math.round(window.innerWidth / 96) * 25.4);																
+    console.log("window.innerWidth MM", Math.round(window.innerWidth / 96) * 25.4);
     this.screenWidth =  window.innerWidth ; //* window.devicePixelRatio;
     this.screenHeight = window.innerHeight ; //* window.devicePixelRatio;
     let screenWidthMM = this.getScreenWidthInMM();
@@ -152,7 +152,7 @@ onResize(event){
    getScreenWidthInMM()
   {
     return (window.innerWidth / 96) * 25.4;
-  }				  
+  }
 
   @HostListener('document:keypress', ['$event'])
   handleKeyboardEvent(event: KeyboardEvent) {
@@ -224,12 +224,13 @@ onResize(event){
   //https://developer.mozilla.org/en-US/docs/Web/API/MediaDevices/getUserMedia
   async setupDevices() {
     if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
-      
+
       try {
         const stream = await navigator.mediaDevices.getUserMedia({
           video: true
         });
-        if (stream) { 
+        if (stream) {
+          console.log("Form Data: " + JSON.stringify(this.dataCollectorService.formData));
           this.cameraFPS = stream.getVideoTracks()[0].getSettings().frameRate
           console.log("CAMERA FRAME RATE: " + this.cameraFPS);
           this.video.nativeElement.srcObject = stream;
@@ -238,7 +239,7 @@ onResize(event){
           this.video.nativeElement.requestVideoFrameCallback(this.renderFrame.bind(this))
         } else {
           this.error = "You have no output video device";
-          
+
         }
       } catch (e) {
         this.error = e;
@@ -353,7 +354,7 @@ async renderFrame() {
 
       console.log("Sending results");
 
-	  var screenWidthMM = this.getScreenWidthInMM();
+	    var screenWidthMM = this.getScreenWidthInMM();
       var screenResolution = [this.screenWidth, this.screenHeight];
       var data = await this.dataCollectorService.proceedSaccadeResults(this.distFromScreenInCm, screenResolution, screenWidthMM);
 

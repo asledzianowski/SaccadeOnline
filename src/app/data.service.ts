@@ -40,11 +40,11 @@ export class DataService {
   }
 
   public postResultsData(calibrationData:Array<any>, experimentData:Array<any>, distanceFromScreen:number,
-    screenResolution:Array<any>, screenWidthMM: number)
+    screenResolution:Array<any>, screenWidthMM: number, formData: object)
   {
     return this.httpClient.post<any>(this.REST_API_SERVER + "/postresultsdata",
     { calibration_data: calibrationData, experiment_data: experimentData, distance_from_screen: distanceFromScreen,
-      screen_resolution: screenResolution, screen_width_mm: screenWidthMM})
+      screen_resolution: screenResolution, screen_width_mm: screenWidthMM, form_data: formData})
   }
 
 }
