@@ -239,7 +239,7 @@ onResize(event){
           this.video.nativeElement.requestVideoFrameCallback(this.renderFrame.bind(this))
         } else {
           this.error = "You have no output video device";
-
+          console.log(this.error);
         }
       } catch (e) {
         this.error = e;
