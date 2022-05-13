@@ -23,7 +23,21 @@ export class FormComponent  {
   public validationText : string;
 
 
-  constructor(private dataCollectorService : DataCollectorService, private router:Router) {}
+  constructor(private dataCollectorService : DataCollectorService, private router:Router){}
+
+  async ngAfterViewInit() {
+
+      console.log("Form Data: " + JSON.stringify(this.dataCollectorService.formData));
+      if(this.dataCollectorService.formData != undefined)
+      {
+        this.sex = this.dataCollectorService.formData['sex'] == "K" ? 0 : 1;
+        this.age = this.dataCollectorService.formData['age'];
+        this.visionDefect = this.dataCollectorService.formData['visionDefect'];
+        this.stress = this.dataCollectorService.formData['stress'];
+        this.mood = this.dataCollectorService.formData['mood'];
+
+      }
+  }
 
   getFormData()
   {

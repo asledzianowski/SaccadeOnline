@@ -107,6 +107,12 @@ onResize(event){
 }
   async ngAfterViewInit() {
 
+    //Redirect with reload (no need to reinitialize objects)
+    if(this.dataCollectorService.formData == undefined)
+    {
+      window.location.href = location.protocol + '//' + location.host + '/form';
+    }
+
     await this.setupDevices();
     this.initializeServices();
 
@@ -134,7 +140,7 @@ onResize(event){
   initializeServices(){
 
     // define drawing defaults
-	console.log("window.innerWidth CM", (window.innerWidth / 96) * 2.54)
+	  console.log("window.innerWidth CM", (window.innerWidth / 96) * 2.54)
     console.log("window.innerWidth MM", Math.round(window.innerWidth / 96) * 25.4);
     this.screenWidth =  window.innerWidth ; //* window.devicePixelRatio;
     this.screenHeight = window.innerHeight ; //* window.devicePixelRatio;
@@ -149,7 +155,7 @@ onResize(event){
 
   }
 
-   getScreenWidthInMM()
+  getScreenWidthInMM()
   {
     return (window.innerWidth / 96) * 25.4;
   }

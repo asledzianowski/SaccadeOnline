@@ -58,23 +58,14 @@ export class DataCollectorService
     }
   }
 
-  // public proceedResults(saccadeResults: string)
-  // {
-  //   this.dataService.postResultsData(this.calibrationData, this.experimentData).subscribe((data: any[])=>{
+  public clearGazeData()
+  {
+    this.uncompletedCalibrationRequests = [];
+    this.calibrationData = [];
+    this.uncompletedExperimentRequests = [];
+    this.experimentData = [];
 
-  //     console.log("RESULTS RECEIVED FROM API:")
-  //     console.log("Estimation Data:")
-  //     console.log(JSON.stringify(data['result_data']));
-  //     console.log("Image Data:")
-  //     console.log(JSON.stringify(data['result_image']));
-  //     saccadeResults = JSON.stringify(data['result_data']);
-  //     console.log("Results applied...");
-  //     return saccadeResults;
-
-  //     //console.log("Imager rendering...");
-  //     //imageResults.src = "data:image/png;base64, " + JSON.stringify(data['result_image']);
-  //   });
-  // }
+  }
 
   public async proceedSaccadeResults(distanceFromScreen: number, screenResolution:Array<any>, screenWidthMM: number): Promise<any[]> {
     return new Promise((resolve, reject) => {
