@@ -1,76 +1,83 @@
 
-  <div class="center, header" style="background-color: gray;">
-    <img [src]='pjatkSrc' style="height: 40px; width: 150px; margin: auto;">
-
-  </div>
-  <div style="margin-right: auto; margin-left: auto; text-align: center;
-  font-family:tahoma; font-size: 16pt; font-weight:500; background-color: gray;
-  height: 50px;">
-    <img [src]='logoSrc' style="height: 40px; width: 40px; margin-right: auto; margin-left: auto; text-align: center;">
-    <div style="display: inline-block; vertical-align:bottom; padding-left: 2px; font-weight: bold;" class="logo-font">
-      Wypełnij Formularz Badania</div>
-  </div>
-  <div style="background-color: gray; ">
-    <div style="width: 400px; margin-left: auto; margin-right: auto; background-color: gray;">
-
-
-      <div class="form-group">
-        <label for="sexDD">Płeć</label>
-        <select class="form-control" name="sexDD" [(ngModel)]="sex">
-           <option [value]="0" >Kobieta</option>
-           <option [value]="1" >Mężczyzna</option>
-        </select>
-      </div>
-
-      <div class="form-group">
-        <label for="ageDD">Wiek</label>
-        <input type="number" id="ageDD" name="ageDD" class="form-control"
-        [(ngModel)]="age">
-      </div>
-
-      <div class="form-group">
-        <label for="visionDD">Wada wzroku</label>
-        <select class="form-control" name="visionDD" [(ngModel)]="visionDefect">
-           <option [value]="0" >Nie</option>
-           <option [value]="1" >Tak</option>
-        </select>
-      </div>
-
-      <div class="form-group">
-        <label for="stressDD">Stres przed badaniem</label>
-        <select class="form-control" name="stressDD" [(ngModel)]="stress">
-           <option [value]="0" >Brak</option>
-           <option [value]="1" >Niski</option>
-           <option [value]="2" >Średni</option>
-           <option [value]="3" >Wysoki</option>
-           <option [value]="4" >Bardzo Wysoki</option>
-        </select>
-      </div>
-
-      <div class="form-group">
-        <label for="stressDD">Nastrój przed badaniem</label>
-        <select class="form-control" name="stressDD" [(ngModel)]="mood">
-          <option [value]="-2" >Bardzo Zły</option>
-          <option [value]="-1" >Zły</option>
-          <option [value]="0" >Neutralny</option>
-          <option [value]="1" >Dobry</option>
-          <option [value]="2" >Bardzo Dobry</option>
-        </select>
-      </div>
-
-      <p class="font-weight-bold text-justify"><span class="badge badge-pill alert-danger"
-         [style.display]="showFormError ? 'block' : 'none'" [innerText]="validationText"></span>
-
-
-      <input type="button" value="Dalej" (click)='getFormData()' class="btn btn-success"
-      style="width: 400px; margin-top: 5px;" />
-
-      <button type="button" [routerLink]="'/welcome'"  class="btn btn-success"
-      style="width: 400px; margin-top: 5px;"> Powrót</button>
-
+  <div style="overflow: auto;">
+    <div class="center, header" style="background-color: gray;">
+      <img [src]='pjatkSrc' style="height: 40px; width: 150px; margin: auto;">
 
     </div>
+    <div style="margin-right: auto; margin-left: auto; text-align: center;
+    font-family:tahoma; font-size: 16pt; font-weight:500; background-color: gray;
+    height: 50px;">
+      <img [src]='logoSrc' style="height: 40px; width: 40px; margin-right: auto; margin-left: auto; text-align: center;">
+      <div style="display: inline-block; vertical-align:bottom; padding-left: 2px; font-weight: bold;" class="logo-font">
+        Wypełnij Formularz Badania</div>
+    </div>
+    <div style="background-color: gray; ">
+      <div style="width: 400px; margin-left: auto; margin-right: auto; background-color: gray;">
+
+
+        <div class="form-group">
+          <label for="idTxt">Id</label>
+          <input class="form-control" type="text" name="idTxt" [(ngModel)]="id">
+        </div>
+
+        <div class="form-group">
+          <label for="sexDD">Płeć</label>
+          <select class="form-control" name="sexDD" [(ngModel)]="sex">
+            <option [value]="0" >Kobieta</option>
+            <option [value]="1" >Mężczyzna</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label for="ageDD">Wiek</label>
+          <input type="number" id="ageDD" name="ageDD" class="form-control"
+          [(ngModel)]="age">
+        </div>
+
+        <div class="form-group">
+          <label for="visionDD">Wada wzroku</label>
+          <select class="form-control" name="visionDD" [(ngModel)]="visionDefect">
+            <option [value]="0" >Nie</option>
+            <option [value]="1" >Tak</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label for="stressDD">Stres przed badaniem</label>
+          <select class="form-control" name="stressDD" [(ngModel)]="stress">
+            <option [value]="0" >Brak</option>
+            <option [value]="1" >Niski</option>
+            <option [value]="2" >Średni</option>
+            <option [value]="3" >Wysoki</option>
+            <option [value]="4" >Bardzo Wysoki</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label for="stressDD">Nastrój przed badaniem</label>
+          <select class="form-control" name="stressDD" [(ngModel)]="mood">
+            <option [value]="-2" >Bardzo Zły</option>
+            <option [value]="-1" >Zły</option>
+            <option [value]="0" >Neutralny</option>
+            <option [value]="1" >Dobry</option>
+            <option [value]="2" >Bardzo Dobry</option>
+          </select>
+        </div>
+
+        <p class="font-weight-bold text-justify"><span class="badge badge-pill alert-danger"
+          [style.display]="showFormError ? 'block' : 'none'" [innerText]="validationText"></span>
+
+
+        <input type="button" value="Dalej" (click)='getFormData()' class="btn btn-success"
+        style="width: 400px; margin-top: 5px;" />
+
+        <button type="button" [routerLink]="'/welcome'"  class="btn btn-success"
+        style="width: 400px; margin-top: 5px;"> Powrót</button>
+
+
+      </div>
 
   </div>
+</div>
 
 

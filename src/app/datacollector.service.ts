@@ -27,6 +27,7 @@ export class DataCollectorService
     this.uncompletedCalibrationRequests.push(timeStamp);
     this.dataService.postGazeData(base64Image).subscribe((data: any[])=>{
 
+      console.log("DATA ERROR TEST: ", data );
       var dataItem = { "time": timeStamp, "gaze_x": data['gaze_x'],"gaze_y": data['gaze_y'],
       "marker": currentState, "state" : currentState};
 

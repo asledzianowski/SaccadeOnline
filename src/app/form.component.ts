@@ -14,13 +14,14 @@ export class FormComponent  {
   pjatkSrc = "../assets/pjatk_2.png"
   eyeSrc = "../assets/eye_1.png"
 
+  public id: string;
   public sex: number;
   public age: number;
   public visionDefect: number;
   public stress: number;
   public mood: number;
-  public showFormError : boolean;
-  public validationText : string;
+  public showFormError : boolean = true;
+  public validationText : string = "Proszę o wypełnienie formularza";
 
 
   constructor(private dataCollectorService : DataCollectorService, private router:Router){}

@@ -23,6 +23,9 @@ export class WebcamSnapshotComponent implements AfterViewInit {
   VIDEO_HEIGHT = 480;
   initialTime: Date;
 
+  @ViewChild("dpi")
+  public dpi: ElementRef;
+
   @ViewChild("video")
   public video: ElementRef;
 
@@ -157,7 +160,8 @@ onResize(event){
 
   getScreenWidthInMM()
   {
-    return (window.innerWidth / 96) * 25.4;
+    //console.log("Window width cm", (window.innerWidth / 37.79) );
+    return (window.innerWidth / 96) * 2.54;
   }
 
   @HostListener('document:keypress', ['$event'])
@@ -363,6 +367,8 @@ async renderFrame() {
 	    var screenWidthMM = this.getScreenWidthInMM();
       var screenResolution = [this.screenWidth, this.screenHeight];
       var data = await this.dataCollectorService.proceedSaccadeResults(this.distFromScreenInCm, screenResolution, screenWidthMM);
+
+      console.log("DATA RECEIVED:", data);
 
       this.zone.run(() => {
         this.saccadeResultsId = data['result_id'];

@@ -1,5 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { throwError } from 'rxjs';
+import { catchError } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -37,6 +39,14 @@ export class DataService {
   public postGazeData(base64Data:string)
   {
     return this.httpClient.post<any>(this.REST_API_SERVER + "/postgazedata", { base64_image_string : base64Data })
+    .pipe(
+      catchError((err) => {
+        console.log('ERROR IN DATA OR API')
+        console.error(err);
+        window.location.href = location.protocol + '//' + location.host + '/error';
+        return throwError(err);
+      })
+    )
   }
 
   public postResultsData(calibrationData:Array<any>, experimentData:Array<any>, distanceFromScreen:number,
@@ -45,6 +55,14 @@ export class DataService {
     return this.httpClient.post<any>(this.REST_API_SERVER + "/postresultsdata",
     { calibration_data: calibrationData, experiment_data: experimentData, distance_from_screen: distanceFromScreen,
       screen_resolution: screenResolution, screen_width_mm: screenWidthMM, form_data: formData})
+      .pipe(
+        catchError((err) => {
+          console.log('ERROR IN DATA OR API')
+          console.error(err);
+          window.location.href = location.protocol + '//' + location.host + '/error';
+          return throwError(err);
+        })
+      )
   }
 
 }
