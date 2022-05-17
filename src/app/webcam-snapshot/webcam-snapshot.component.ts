@@ -105,15 +105,22 @@ onResize(event){
   this.screenWidth =  window.innerWidth ; //event.target.innerWidth ; //* window.devicePixelRatio;
   this.screenHeight = window.innerHeight ; //event.target.innerHeight ; //* window.devicePixelRatio;
   let screenWidthMM = this.getScreenWidthInMM();
+
+  //this.VIDEO_HEIGHT = (this.screenHeight / 5) * 3;
+  //this.VIDEO_WIDTH = (this.VIDEO_HEIGHT / 4) * 5;
+
   this.drawingService.initialize(this.experimentCanvas.nativeElement.getContext('2d'),
     this.screenWidth, this.screenHeight, this.distFromScreenInCm, this.targetToFixDistanceInDeg, screenWidthMM);
+
+  // this.videoService.initialize(this.video, this.video_canvas, this.canvasConverter,
+  //   this.VIDEO_WIDTH, this.VIDEO_HEIGHT);
 }
   async ngAfterViewInit() {
 
     //Redirect with reload (no need to reinitialize objects)
     if(this.dataCollectorService.formData == undefined)
     {
-      //window.location.href = location.protocol + '//' + location.host + '/form';
+      window.location.href = location.protocol + '//' + location.host + '/form';
     }
 
     await this.setupDevices();
@@ -147,6 +154,11 @@ onResize(event){
     console.log("window.innerWidth MM", Math.round(window.innerWidth / 96) * 25.4);
     this.screenWidth =  window.innerWidth ; //* window.devicePixelRatio;
     this.screenHeight = window.innerHeight ; //* window.devicePixelRatio;
+
+    // this.VIDEO_HEIGHT = (this.screenHeight / 5) * 3;
+    // this.VIDEO_WIDTH = (this.VIDEO_HEIGHT / 4) * 5;
+
+    console.log("screenHeight: ", this.screenHeight);
     let screenWidthMM = this.getScreenWidthInMM();
     this.drawingService.initialize(this.experimentCanvas.nativeElement.getContext('2d'),
     this.screenWidth, this.screenHeight, this.distFromScreenInCm, this.targetToFixDistanceInDeg, screenWidthMM);
@@ -220,6 +232,7 @@ onResize(event){
 
   setUpResultState()
   {
+    this.showConfiguration = false;
     this.currentState = State.RESULTS;
     //fix for angular error (style bindings in html not working when called from requestVideoFrameCallback)
     this.experimentCanvasDiv.nativeElement.style["display"] = "none";
