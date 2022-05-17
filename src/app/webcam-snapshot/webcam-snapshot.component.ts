@@ -113,7 +113,7 @@ onResize(event){
     //Redirect with reload (no need to reinitialize objects)
     if(this.dataCollectorService.formData == undefined)
     {
-      window.location.href = location.protocol + '//' + location.host + '/form';
+      //window.location.href = location.protocol + '//' + location.host + '/form';
     }
 
     await this.setupDevices();
@@ -160,8 +160,9 @@ onResize(event){
 
   getScreenWidthInMM()
   {
-    //console.log("Window width cm", (window.innerWidth / 37.79) );
-    return (window.innerWidth / 96) * 2.54;
+    //https://ryanve.com/_php/airve/chromosome/request.php?request=lab/resolution/#units
+    //96⁢px = 1⁢in = 2.54⁢cm = 25.4mm
+    return (window.innerWidth / 96) * 25.4;
   }
 
   @HostListener('document:keypress', ['$event'])
