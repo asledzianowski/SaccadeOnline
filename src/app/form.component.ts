@@ -23,6 +23,9 @@ export class FormComponent  {
   public mood: number;
   public type: number = 0;
   public lateralization: number;
+  public phase: number;
+  public uprds: number;
+
   public showFormError : boolean = true;
   public validationText : string = "Proszę o wypełnienie formularza";
 
@@ -36,13 +39,26 @@ export class FormComponent  {
       {
         this.id = this.dataCollectorService.formData['id'];
         this.type = this.getTypeInt(this.dataCollectorService.formData['type']),
-        this.lateralization =  this.dataCollectorService.formData['lateralization'] == "P" ? 0 : 1,
+        this.lateralization = this.getLaterationInt(this.dataCollectorService.formData['lateralization']),
+        this.phase = this.getPhaseInt(this.dataCollectorService.formData['phase']),
+        this.uprds = this.dataCollectorService.formData['uprds'];
         this.email = this.dataCollectorService.formData['email'];
-        this.sex = this.dataCollectorService.formData['sex'] == "K" ? 0 : 1;
+        this.sex = this.dataCollectorService.formData['sex'] == "F" ? 0 : 1;
         this.age = this.dataCollectorService.formData['age'];
         this.visionDefect = this.dataCollectorService.formData['visionDefect'];
         this.stress = this.dataCollectorService.formData['stress'];
         this.mood = this.dataCollectorService.formData['mood'];
+
+      }
+  }
+
+  async onTypeSelectionChange()
+  {
+      if(this.type == 0)
+      {
+        this.lateralization = undefined;
+        this.phase = undefined;
+        this.uprds =undefined;
 
       }
   }
@@ -91,9 +107,11 @@ export class FormComponent  {
       this.dataCollectorService.formData = {
         "id": this.id,
         "type": this.getTypeString(this.type),
-        "lateralization" : this.lateralization == 0 ? "P" : "L",
+        "lateralization" : this.getLaterationString(this.lateralization),
+        "phase": this.getPhaseString(this.phase),
+        "uprds": this.uprds,
         "email": this.email,
-        "sex" : this.sex == 0 ? "K" : "M",
+        "sex" : this.sex == 0 ? "F" : "M",
         "age" : this.age,
         "visionDefect" : this.visionDefect,
         "stress" : this.stress,
@@ -115,7 +133,7 @@ export class FormComponent  {
     else if(type == 4) return "CBS";
     else if(type == 5) return "DLB";
     else if(type == 6) return "ET";
-    else if(type == 7) return "Inna";
+    else if(type == 7) return "Other";
     else return undefined;
 
   }
@@ -129,9 +147,41 @@ export class FormComponent  {
     else if(type == "CBS") return 4;
     else if(type == "DLB") return 5;
     else if(type == "ET") return 6;
-    else if(type == "Inna") return 7;
+    else if(type == "Other") return 7;
     else return undefined;
 
+  }
+
+  getLaterationString(type : number)
+  {
+    if(type == 0) return "R";
+    else if(type == 1) return "L";
+    else return undefined;
+  }
+
+  getLaterationInt(type : string)
+  {
+    if(type == "R") return 0;
+    else if(type == "L") return 1;
+    else return undefined;
+  }
+
+  getPhaseString(phase : number)
+  {
+    if(phase == 0) return "MedOff";
+    else if(phase == 1) return "MedOn";
+    else if(phase == 2) return "DBS";
+    else if(phase == 3) return "Pump";
+    else return undefined;
+  }
+
+  getPhaseInt(phase : string)
+  {
+    if(phase == "MedOff") return 0;
+    else if(phase == "MedOn") return 1;
+    else if(phase == "DBS") return 2;
+    else if(phase == "Pump") return 3;
+    else return undefined;
   }
 
 }

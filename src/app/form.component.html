@@ -71,7 +71,7 @@
 
         <div class="form-group">
           <label for="typeDD">Typ badanego</label>
-          <select class="form-control" name="typeDD" [(ngModel)]="type">
+          <select class="form-control" name="typeDD" [(ngModel)]="type" (ngModelChange)="onTypeSelectionChange()">
             <option [value]="0" >Zdrowy</option>
             <option [value]="1" >PD</option>
             <option [value]="2" >MSA</option>
@@ -90,6 +90,22 @@
               <option [value]="0" >P</option>
               <option [value]="1" >L</option>
             </select>
+          </div>
+
+          <div class="form-group">
+            <label for="phasenDD">Faza</label>
+            <select class="form-control" name="phaseDD" [(ngModel)]="phase">
+              <option [value]="0" >Bez lekow</option>
+              <option [value]="1" >Na lekach</option>
+              <option [value]="2" >DBS</option>
+              <option [value]="3" >Pompy</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label for="uprdsDD">MDS-UPDRS</label>
+            <input type="number" id="ageDD" name="uprdsDD" class="form-control"
+            [(ngModel)]="uprds">
           </div>
 
         </div>
