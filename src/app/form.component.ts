@@ -15,22 +15,29 @@ export class FormComponent  {
   eyeSrc = "../assets/eye_1.png"
 
   public id: string;
+  public email: string;
   public sex: number;
   public age: number;
   public visionDefect: number;
   public stress: number;
   public mood: number;
+  public type: number = 0;
+  public lateralization: number;
   public showFormError : boolean = true;
   public validationText : string = "Proszę o wypełnienie formularza";
 
 
   constructor(private dataCollectorService : DataCollectorService, private router:Router){}
 
-  async ngAfterViewInit() {
+  async ngOnInit() {
 
       console.log("Form Data: " + JSON.stringify(this.dataCollectorService.formData));
       if(this.dataCollectorService.formData != undefined)
       {
+        this.id = this.dataCollectorService.formData['id'];
+        this.type = this.getTypeInt(this.dataCollectorService.formData['type']),
+        this.lateralization =  this.dataCollectorService.formData['lateralization'] == "P" ? 0 : 1,
+        this.email = this.dataCollectorService.formData['email'];
         this.sex = this.dataCollectorService.formData['sex'] == "K" ? 0 : 1;
         this.age = this.dataCollectorService.formData['age'];
         this.visionDefect = this.dataCollectorService.formData['visionDefect'];
@@ -82,17 +89,48 @@ export class FormComponent  {
       this.showFormError = false;
 
       this.dataCollectorService.formData = {
-        "type": "HC",
+        "id": this.id,
+        "type": this.getTypeString(this.type),
+        "lateralization" : this.lateralization == 0 ? "P" : "L",
+        "email": this.email,
         "sex" : this.sex == 0 ? "K" : "M",
         "age" : this.age,
         "visionDefect" : this.visionDefect,
         "stress" : this.stress,
-        "mood" : this.mood,
+        "mood" : this.mood
       };
 
       this.router.navigate(['/camera']);
 
     }
+
+  }
+
+  getTypeString(type : number)
+  {
+    if(type == 0) return "HC";
+    else if(type == 1) return "PD";
+    else if(type == 2) return "MSA";
+    else if(type == 3) return "PSP";
+    else if(type == 4) return "CBS";
+    else if(type == 5) return "DLB";
+    else if(type == 6) return "ET";
+    else if(type == 7) return "Inna";
+    else return undefined;
+
+  }
+
+  getTypeInt(type : string)
+  {
+    if(type == "HC") return 0;
+    else if(type == "PD") return 1;
+    else if(type == "MSA") return 2;
+    else if(type == "PSP") return 3;
+    else if(type == "CBS") return 4;
+    else if(type == "DLB") return 5;
+    else if(type == "ET") return 6;
+    else if(type == "Inna") return 7;
+    else return undefined;
 
   }
 

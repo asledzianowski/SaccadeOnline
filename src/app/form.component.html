@@ -21,6 +21,11 @@
         </div>
 
         <div class="form-group">
+          <label for="emailTxt">Email (jeżeli chcesz otrzymać wyniki badania)</label>
+          <input class="form-control" type="text" name="emailTxt" [(ngModel)]="email">
+        </div>
+
+        <div class="form-group">
           <label for="sexDD">Płeć</label>
           <select class="form-control" name="sexDD" [(ngModel)]="sex">
             <option [value]="0" >Kobieta</option>
@@ -63,6 +68,32 @@
             <option [value]="2" >Bardzo Dobry</option>
           </select>
         </div>
+
+        <div class="form-group">
+          <label for="typeDD">Typ badanego</label>
+          <select class="form-control" name="typeDD" [(ngModel)]="type">
+            <option [value]="0" >Zdrowy</option>
+            <option [value]="1" >PD</option>
+            <option [value]="2" >MSA</option>
+            <option [value]="3" >PSP</option>
+            <option [value]="4" >CBS</option>
+            <option [value]="5" >DLB</option>
+            <option [value]="6" >ET</option>
+            <option [value]="7" >Inna</option>
+          </select>
+        </div>
+
+        <div [style.display]="type!=0 ? 'block' : 'none'">
+          <div class="form-group">
+            <label for="laterationDD">Lateracja</label>
+            <select class="form-control" name="laterationDD" [(ngModel)]="lateralization">
+              <option [value]="0" >P</option>
+              <option [value]="1" >L</option>
+            </select>
+          </div>
+
+        </div>
+
 
         <p class="font-weight-bold text-justify"><span class="badge badge-pill alert-danger"
           [style.display]="showFormError ? 'block' : 'none'" [innerText]="validationText"></span>
