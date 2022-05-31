@@ -18,7 +18,7 @@ export class StimuliService
   private calibrationFixationTime : number = 4000;
 
   private experimentSaccadeCount : number = 0;
-  private experimentSaccadeLimit : number = 6;
+  private experimentSaccadeLimit : number = 11;
   private experimentFixationTime : number = 1000;
 
   private currentIntervalId : any = null;
