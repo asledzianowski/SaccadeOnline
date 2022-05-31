@@ -85,7 +85,7 @@ export class WebcamSnapshotComponent implements AfterViewInit {
   fps : string ;
 
   public distFromScreenInCm: number = 86;
-  public targetToFixDistanceInDeg: number = 5;
+  public targetToFixDistanceInDeg: number = 8;
 
   constructor(private drawingService : DrawingService, private videoService : VideoService,
     private stimuliService : StimuliService, private dataCollectorService : DataCollectorService,
