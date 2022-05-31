@@ -65,12 +65,8 @@ export class FormComponent  {
 
   getFormData()
   {
-    if(this.sex == undefined && this.age == undefined)
-    {
-      this.validationText = "Proszę o wypełnienie formularza";
-      this.showFormError = true;
-    }
-    else if(this.sex == undefined)
+
+    if(this.sex == undefined)
     {
       this.validationText = "Proszę podać płeć";
       this.showFormError = true;
