@@ -442,7 +442,7 @@ async renderFrame() {
     var isAllDataCollected = this.IsAllDataCollected();
     if(isAllDataCollected == false)
     {
-      this.resultsTimerId = setInterval(this.proceedTestQuality.bind(this), 5000);
+      this.resultsTimerId = setInterval(this.proceedTestQuality.bind(this), 1000);
     }
     else
     {
@@ -478,14 +478,14 @@ async renderFrame() {
     var isAllDataCollected = this.IsAllDataCollected();
     if(isAllDataCollected == false)
     {
-      this.resultsTimerId = setInterval(this.proceedResults.bind(this), 5000);
+      this.resultsTimerId = setInterval(this.proceedResults.bind(this), 1000);
     }
     else
     {
-      console.log("Calibration Data:")
-      console.log(JSON.stringify(this.dataCollectorService.CalibrationData));
-      console.log("Experiment Data:")
-      console.log(JSON.stringify(this.dataCollectorService.ExperimentData));
+      // console.log("Calibration Data:")
+      // console.log(JSON.stringify(this.dataCollectorService.CalibrationData));
+      // console.log("Experiment Data:")
+      // console.log(JSON.stringify(this.dataCollectorService.ExperimentData));
 
       console.log("Sending results");
 
@@ -513,6 +513,10 @@ async renderFrame() {
 
   public IsAllDataCollected()
   {
+    this.zone.run(() => {
+      this.framesLeftTotal = this.dataCollectorService.UncompletedCalibrationRequests.length +
+      this.dataCollectorService.UncompletedExperimentRequests.length;
+    });
 
     console.log("Left calibration requests: "
         + this.dataCollectorService.UncompletedCalibrationRequests.length);
