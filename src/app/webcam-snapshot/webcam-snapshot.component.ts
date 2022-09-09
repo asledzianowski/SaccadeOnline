@@ -4,8 +4,9 @@ import { DrawingService } from '../drawing.service';
 import { VideoService } from '../video.service';
 import { StimuliService } from '../stimuli.service';
 import { DataCollectorService } from '../datacollector.service';
+import { ThisReceiver } from "@angular/compiler";
 
-export enum State {CONFIG,CALIBRATION,EXPERIMENT,RESULTS}
+export enum State {NONE,CONFIG,TESTQUALITY,CALIBRATION,EXPERIMENT,RESULTS,QUALITYRESULTS}
 
 @Component({
   selector: "app-webcam-snapshot",
@@ -45,6 +46,9 @@ export class WebcamSnapshotComponent implements AfterViewInit {
   @ViewChild("resultsDiv")
   public resultsDiv: ElementRef;
 
+  @ViewChild("testQualityDiv")
+  public testQualityDiv: ElementRef;
+
   @ViewChild("saccadeList")
   public saccadeList: ElementRef;
 
@@ -62,6 +66,10 @@ export class WebcamSnapshotComponent implements AfterViewInit {
   {"Start":1428,"End":1597,"MarkerChange":1190,"LatencyFrameCount":3,"DurationFrameCount":2,"Latency":238,"Duration":169,"Distance":null,"Amplitude":0.21,"AvgVelocity":null,"MaxVelocity":null,"Gain":null},{"Start":4392,"End":4472,"MarkerChange":4315,"LatencyFrameCount":1,"DurationFrameCount":1,"Latency":77,"Duration":80,"Distance":null,"Amplitude":0.15,"AvgVelocity":null,"MaxVelocity":null,"Gain":null},{"Start":5666,"End":5745,"MarkerChange":5431,"LatencyFrameCount":3,"DurationFrameCount":1,"Latency":235,"Duration":79,"Distance":null,"Amplitude":0.19,"AvgVelocity":null,"MaxVelocity":null,"Gain":null},{"Start":7029,"End":7109,"MarkerChange":6787,"LatencyFrameCount":3,"DurationFrameCount":1,"Latency":242,"Duration":80,"Distance":null,"Amplitude":0.13,"AvgVelocity":null,"MaxVelocity":null,"Gain":null},{"Start":9361,"End":9669,"MarkerChange":9275,"LatencyFrameCount":1,"DurationFrameCount":4,"Latency":86,"Duration":308,"Distance":null,"Amplitude":0.18,"AvgVelocity":null,"MaxVelocity":null,"Gain":null},{"Start":10394,"End":10548,"MarkerChange":10316,"LatencyFrameCount":1,"DurationFrameCount":2,"Latency":78,"Duration":154,"Distance":null,"Amplitude":0.06,"AvgVelocity":null,"MaxVelocity":null,"Gain":null}]
 
 
+
+
+  public framesLeftTotal: number;
+
   public screenWidth: number;
   public screenHeight: number;
 
@@ -73,6 +81,14 @@ export class WebcamSnapshotComponent implements AfterViewInit {
   public showResults: boolean;
   public showResultsLoader: boolean = true;
   public showSaccadeResults: boolean = false;
+
+
+  public showTestQualityLoader: boolean = true;
+  public showTestQualitResults: boolean = false;
+  public testQualityIsGood: boolean;
+  public testQualityPowerSpectrumMean: number;
+  public testQualityMeanSdRelation: number;
+
 
   private document: any;
   private documentElement: any;
@@ -120,15 +136,19 @@ onResize(event){
     //Redirect with reload (no need to reinitialize objects)
     if(this.dataCollectorService.formData == undefined)
     {
+      //Comment while developing
       window.location.href = location.protocol + '//' + location.host + '/form';
     }
 
     await this.setupDevices();
     this.initializeServices();
 
+    //COMMENT FOR TESTS
     this.setUpConfigState();
+
     //UNCOMMENT FOR TESTS
     //this.testResultPanel();
+    //this.testQualityResultPanel()
 
     this.documentElement = document.documentElement;
     this.document = document;
@@ -143,6 +163,19 @@ onResize(event){
     this.showResultsLoader = true;
     this.showSaccadeResults = true;
     this.saccadeResultsId = '102030'
+    this.experimentDataFPS = 30;
+    this.cameraFPS = 30;
+  }
+
+  testQualityResultPanel()
+  {
+    console.log("Start testQualityResultPanel")
+    this.setUpTestQualityResultState();
+    this.testQualityIsGood =  true;
+    this.testQualityMeanSdRelation = 9999;
+    this.testQualityPowerSpectrumMean = 999;
+    this.showTestQualityLoader = true;
+    this.showTestQualitResults = true;
     this.experimentDataFPS = 30;
     this.cameraFPS = 30;
   }
@@ -210,6 +243,22 @@ onResize(event){
     this.setUpCalibrationState();
   }
 
+  startQualityTest()
+  {
+    this.setUpTestQuailtyState();
+  }
+
+  setUpTestQuailtyState()
+  {
+    this.currentState = State.TESTQUALITY;
+    this.showConfiguration = false;
+    this.showStimuli = true;
+    this.showResults = false;
+    this.resetStopWatch();
+    this.stimuliService.runCalibration();
+  }
+
+
   setUpCalibrationState()
   {
     this.currentState = State.CALIBRATION;
@@ -230,6 +279,7 @@ onResize(event){
     this.stimuliService.runExperiment();
   }
 
+
   setUpResultState()
   {
     this.showConfiguration = false;
@@ -240,9 +290,20 @@ onResize(event){
     this.resultsDiv.nativeElement.style["background-color"] = "gray !important";
     this.resultsDiv.nativeElement.style["height"] =  this.screenWidth + "px";
     this.stopCamera();
+  }
 
-    //test only
-    //this.saccadeResults = this.resultsMock
+  setUpTestQualityResultState()
+  {
+    this.showConfiguration = false;
+    this.currentState = State.QUALITYRESULTS;
+    //fix for angular error (style bindings in html not working when called from requestVideoFrameCallback)
+
+    this.experimentCanvasDiv.nativeElement.style["display"] = "none";
+    this.testQualityDiv.nativeElement.style["display"] = "block";
+    this.testQualityDiv.nativeElement.style["background-color"] = "gray !important";
+    this.testQualityDiv.nativeElement.style["height"] =  this.screenWidth + "px";
+
+    this.stopCamera();
   }
 
   //https://developer.mozilla.org/en-US/docs/Web/API/MediaDevices/getUserMedia
@@ -301,7 +362,7 @@ async renderFrame() {
     // this.fps = (++this.paintCount / elapsed).toFixed(3);
     // console.log("Current FPS: " + this.fps)
 
-    if(this.currentState != State.RESULTS)
+    if(this.currentState != State.RESULTS && this.currentState != State.QUALITYRESULTS)
     {
       // or requestAnimationFrame
       this.video.nativeElement.requestVideoFrameCallback(this.renderFrame.bind(this));
@@ -322,6 +383,17 @@ async renderFrame() {
         case State.CONFIG:
           this.videoService.proceedVideoFrame(base64Image);
           //console.log("ProceedVideoFrame: " + now)
+          break;
+        case State.TESTQUALITY:
+          if(this.stimuliService.IsCalibrationFinished == true)
+          {
+            this.setUpTestQualityResultState();
+          }
+          else
+          {
+            this.dataCollectorService.proceedCalibrationFrame(this.getCurrentTimeStamp(),
+                  base64Image, this.stimuliService.CurrentMarkerState);
+          }
           break;
         case State.CALIBRATION:
           if(this.stimuliService.IsCalibrationFinished == true)
@@ -354,8 +426,47 @@ async renderFrame() {
           await this.proceedResults();
           //this.proceedResults();
           break;
+        case State.QUALITYRESULTS:
+            await this.proceedTestQuality();
+            break;
 
       }
+
+    }
+  }
+
+  public async proceedTestQuality()
+  {
+    if(this.resultsTimerId != null) clearInterval(this.resultsTimerId);
+
+    var isAllDataCollected = this.IsAllDataCollected();
+    if(isAllDataCollected == false)
+    {
+      this.resultsTimerId = setInterval(this.proceedTestQuality.bind(this), 5000);
+    }
+    else
+    {
+      console.log("Calibration Data:")
+      console.log(JSON.stringify(this.dataCollectorService.CalibrationData));
+
+      console.log("Sending results");
+
+
+      var data = await this.dataCollectorService.proceedTestQuality();
+
+      console.log("DATA RECEIVED:", data);
+
+      this.zone.run(() => {
+        this.testQualityIsGood = data['is_good'];
+        this.testQualityPowerSpectrumMean = data['power_spectrum_mean'];
+        this.testQualityMeanSdRelation = data['mean_sd_relation'];
+
+        this.showTestQualityLoader = false;
+        this.showTestQualitResults = true;
+
+        this.dataCollectorService.clearGazeData();
+      });
+
 
     }
   }
@@ -450,6 +561,14 @@ async renderFrame() {
 
   public reloadPage() {
     window.location.reload();
+  }
+
+  public async goInitialState() {
+    await this.setupDevices();
+    //this.initializeServices();
+    this.experimentCanvasDiv.nativeElement.style["display"] = "block";
+    this.testQualityDiv.nativeElement.style["display"] = "none";
+    this.setUpConfigState();
   }
 
   openFullscreen() {

@@ -65,4 +65,21 @@ export class DataService {
       )
   }
 
+  public postTestQualityData(calibrationData:Array<any>)
+  {
+    console.log('SENDING TestQualityData')
+    console.log(JSON.stringify(calibrationData))
+
+    return this.httpClient.post<any>(this.REST_API_SERVER + "/testquality",
+    { calibration_data: calibrationData})
+      .pipe(
+        catchError((err) => {
+          console.log('ERROR IN DATA OR API')
+          console.error(err);
+          window.location.href = location.protocol + '//' + location.host + '/error';
+          return throwError(err);
+        })
+      )
+  }
+
 }

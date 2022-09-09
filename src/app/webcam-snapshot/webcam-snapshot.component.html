@@ -11,9 +11,14 @@
   <canvas  #video_canvas id="video_canvas" [width]="VIDEO_WIDTH" [height]="VIDEO_HEIGHT"></canvas>
   <canvas  #canvasConverter id="canvasConverter" [width]="VIDEO_WIDTH" [height]="VIDEO_HEIGHT"
     [hidden]="true" ></canvas>
-  <div>
-    <button (click)='startSaccadeTest()' [style.width]="VIDEO_WIDTH + 'px'" class="btn btn-success">
-      Naciśnij spację żeby rozpocząć badanie
+    <div>
+      <button (click)='startQualityTest()' [style.width]="VIDEO_WIDTH + 'px'" class="btn btn-success">
+        Testuj jakość otoczenia
+      </button>
+    </div>
+    <div>
+    <button (click)='startSaccadeTest()' [style.width]="VIDEO_WIDTH + 'px'" class="btn btn-success"
+    style="margin-top: 5px;"> Rozpocznij badanie (Spacja)
     </button>
   </div>
   <div>
@@ -52,46 +57,57 @@
   <div #saccadeList id="saccadeList"  [style.width]="screenWidth / 2 + 'px'" [style.display]="showSaccadeResults ? 'block' : 'none'"
   style="overflow: auto; height: 200px; margin-left: auto; margin-right: auto; text-align: left;"  >
 
-  <table class="table">
-    <thead>
-        <tr class="text-white-small">
-            <th scope="col">Id</th>
-            <th scope="col">Latency</th>
-            <th scope="col">Duration</th>
-            <th scope="col">Amplitude</th>
-            <th scope="col">AvgVelocity</th>
-            <th scope="col">MaxVelocity</th>
-            <th scope="col">Gain</th>
-        </tr>
-    </thead>
-    <tbody>
-        <tr *ngFor="let saccade of saccadeResults; let i = index" class="text-white-small" scope="row">
-            <td>{{i}}</td>
-            <td>{{saccade.Latency}} ms (f: {{saccade.LatencyFrameCount}})</td>
-            <td>{{saccade.Duration}} ms (f: {{saccade.DurationFrameCount}})</td>
-            <td>{{saccade.Amplitude}} deg</td>
-            <td>{{saccade.AvgVelocity}} deg/sec</td>
-            <td>{{saccade.MaxVelocity}} deg/sec</td>
-            <td>{{saccade.Gain}}</td>
+    <table class="table">
+      <thead>
+          <tr class="text-white-small">
+              <th scope="col">Id</th>
+              <th scope="col">Latency</th>
+              <th scope="col">Duration</th>
+              <th scope="col">Amplitude</th>
+              <th scope="col">AvgVelocity</th>
+              <th scope="col">MaxVelocity</th>
+              <th scope="col">Gain</th>
+          </tr>
+      </thead>
+      <tbody>
+          <tr *ngFor="let saccade of saccadeResults; let i = index" class="text-white-small" scope="row">
+              <td>{{i}}</td>
+              <td>{{saccade.Latency}} ms (f: {{saccade.LatencyFrameCount}})</td>
+              <td>{{saccade.Duration}} ms (f: {{saccade.DurationFrameCount}})</td>
+              <td>{{saccade.Amplitude}} deg</td>
+              <td>{{saccade.AvgVelocity}} deg/sec</td>
+              <td>{{saccade.MaxVelocity}} deg/sec</td>
+              <td>{{saccade.Gain}}</td>
 
-        </tr>
-    </tbody>
-</table>
-
-
-  <!-- <div *ngFor="let saccade of saccadeResults; let i = index" class="text-white-small">
-
-        <div> {{i}} Latency : {{saccade.Latency}} ms (frames: {{saccade.LatencyFrameCount}}),
-                  Duration : {{saccade.Duration}} ms (frames: {{saccade.DurationFrameCount}}),
-                  Amplitude : {{saccade.Amplitude}},
-                  AvgVelocity : {{saccade.AvgVelocity}},
-                  MaxVelocity : {{saccade.MaxVelocity}},
-                  Gain : {{saccade.Gain}},
-        </div>
-
-    </div>
-  </div> -->
-
+          </tr>
+      </tbody>
+    </table>
+  </div>
 </div>
 
-
+<div #testQualityDiv id="testQualityDiv" class="center" [style.display]="'none'" [style.height]="screenHeight" >
+  <div class="center, header">
+    <div>
+      <img [src]='logoSrc' style="height: 40px; width: 40px; margin: auto;">
+      <div style="display: inline-block; vertical-align:bottom; padding-left: 2px;" class="logo-font">Wyniki Testu Otoczenia</div>
+    </div>
+  </div>
+  <button (click)='reloadPage()' class="btn btn-success" style="width: 205px; margin-bottom: 10px;cursor: pointer;">
+    Powrót
+  </button>
+  <div [style.display]="showTestQualityLoader ? 'block' : 'none'">
+    <img alt="Proszę czekać..." [src]='loaderImgSrc' style="margin-top: 20px;">
+    <p class="text-white">Analiza sygnału, proszę czekać...</p>
+  </div>
+  <h6 style="text-align: center;" class="text-white-small"  [style.display]="showTestQualitResults ? 'block' : 'none'">
+    <p>Jakość Sygnału: <span [innerHTML]="testQualityIsGood ? 'Dobra' : 'Słaba'" ></span></p>
+    <p>
+       Widmo Mocy X: <span [innerHTML]="testQualityPowerSpectrumMean" ></span>
+       Średnia / SD: <span [innerHTML]="testQualityMeanSdRelation" ></span>
+    </p>
+    <p>
+      FPS Kamery: <span [innerHTML]="cameraFPS" ></span>
+      FPS Przeglądarki: <span [innerHTML]="experimentDataFPS" ></span>
+    </p>
+  </h6>
+</div>

@@ -27,7 +27,7 @@ export class DataCollectorService
     this.uncompletedCalibrationRequests.push(timeStamp);
     this.dataService.postGazeData(base64Image).subscribe((data: any[])=>{
 
-      console.log("DATA ERROR TEST: ", data );
+      //console.log("DATA ERROR TEST: ", data );
       var dataItem = { "time": timeStamp, "gaze_x": data['gaze_x'],"gaze_y": data['gaze_y'],
       "marker": currentState, "state" : currentState};
 
@@ -87,6 +87,25 @@ export class DataCollectorService
       });
 
     })};
+
+    public async proceedTestQuality(): Promise<any[]> {
+      return new Promise((resolve, reject) => {
+
+        this.dataService.postTestQualityData(this.calibrationData).subscribe((data: any[])=>{
+
+          console.log("RESULTS RECEIVED FROM API:")
+          console.log("Is Good:")
+          console.log(JSON.stringify(data['is_good']));
+          console.log("Power Spectrum Mean:")
+          console.log(JSON.stringify(data['power_spectrum_mean']));
+          console.log("Mean - SD Relation:")
+          console.log(JSON.stringify(data['mean_sd_relation']));
+
+          resolve(data);
+
+        });
+
+      })};
 
     public async TestPromise(): Promise<string> {
       return new Promise((resolve, reject) => {
