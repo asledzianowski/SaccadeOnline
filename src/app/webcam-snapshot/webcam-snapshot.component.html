@@ -49,6 +49,9 @@
     Id Badania: <span [innerHTML]="saccadeResultsId" ></span>
     FPS Kamery: <span [innerHTML]="cameraFPS" ></span>
     FPS Przeglądarki: <span [innerHTML]="experimentDataFPS" ></span>
+    Jakość Sygnału: <span [innerHTML]="saccadeResultsIsGood ? 'Dobra' : 'Słaba'" ></span>
+    Widmo Mocy X: <span [innerHTML]="saccadeResultsPowerSpectrumMean" ></span>
+    Średnia / SD: <span [innerHTML]="saccadeResultsMeanSdRelation" ></span>
   </h6>
   <div style="text-align: center;">
     <img #resultImage id="resultImage" alt="Result Image" [src]='chartSource' [width]="screenWidth / 2"
@@ -92,7 +95,7 @@
       <div style="display: inline-block; vertical-align:bottom; padding-left: 2px;" class="logo-font">Wyniki Testu Otoczenia</div>
     </div>
   </div>
-  <button (click)='reloadPage()' class="btn btn-success" style="width: 205px; margin-bottom: 10px;cursor: pointer;">
+  <button (click)='goInitialState()' class="btn btn-success" style="width: 205px; margin-bottom: 10px;cursor: pointer;">
     Powrót
   </button>
   <div [style.display]="showTestQualityLoader ? 'block' : 'none'">
@@ -107,7 +110,11 @@
     </p>
     <p>
       FPS Kamery: <span [innerHTML]="cameraFPS" ></span>
-      FPS Przeglądarki: <span [innerHTML]="experimentDataFPS" ></span>
+      FPS Przeglądarki: <span [innerHTML]="testQualityFrequency" ></span>
     </p>
   </h6>
+  <div style="text-align: center;">
+    <img #resultImage id="testQualityResultImage" alt="Result Image" [src]='testQualityChartSource' [width]="screenWidth / 2"
+    [style.display]="showTestQualitResults ? 'block' : 'none'" style="margin-left: auto; margin-right: auto;" > <!--chartSource-->
+  </div>
 </div>

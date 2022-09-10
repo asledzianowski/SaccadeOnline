@@ -81,6 +81,12 @@ export class DataCollectorService
         console.log(JSON.stringify(data['result_image']));
         var saccadeResults = JSON.stringify(data['result_data']);
         console.log("Results applied: " + saccadeResults);
+        console.log("Is Good:")
+        console.log(JSON.stringify(data['result_is_good']));
+        console.log("Power Spectrum Mean:")
+        console.log(JSON.stringify(data['power_spectrum_mean']));
+        console.log("Mean - SD Relation:")
+        console.log(JSON.stringify(data['mean_sd_relation']));
 
         resolve(data);
 
@@ -100,6 +106,10 @@ export class DataCollectorService
           console.log(JSON.stringify(data['power_spectrum_mean']));
           console.log("Mean - SD Relation:")
           console.log(JSON.stringify(data['mean_sd_relation']));
+          console.log("Frequency:")
+          console.log(JSON.stringify(data['freq']));
+          console.log("Image Data:")
+          console.log(JSON.stringify(data['image']));
 
           resolve(data);
 

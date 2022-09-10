@@ -31,6 +31,10 @@ export class VideoService
     this.canvasConverter = canvasConverter;
     this.frameWidth = frameWidth;
     this.frameHeight = frameHeight;
+
+    this.current_faceboxes = [];
+    this.current_eyeboxes = [];
+    this.current_eyecenters = [];
   }
 
   public proceedVideoFrame(base64Image : string)

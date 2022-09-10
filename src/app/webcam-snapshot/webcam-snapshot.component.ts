@@ -61,6 +61,9 @@ export class WebcamSnapshotComponent implements AfterViewInit {
   public saccadeResults : any[];
   public saccadeResultsFromAPI : string;
   public chartSource : string;
+  public saccadeResultsIsGood: boolean;
+  public saccadeResultsPowerSpectrumMean: number;
+  public saccadeResultsMeanSdRelation: number;
 
   public resultsMock : any[] = [{"Start":1428,"End":1597,"MarkerChange":1190,"LatencyFrameCount":3,"DurationFrameCount":2,"Latency":238,"Duration":169,"Distance":null,"Amplitude":0.21,"AvgVelocity":60.99,"MaxVelocity":200.10,"Gain":10.8},{"Start":4392,"End":4472,"MarkerChange":4315,"LatencyFrameCount":1,"DurationFrameCount":1,"Latency":77,"Duration":80,"Distance":null,"Amplitude":0.15,"AvgVelocity":null,"MaxVelocity":null,"Gain":null},{"Start":5666,"End":5745,"MarkerChange":5431,"LatencyFrameCount":3,"DurationFrameCount":1,"Latency":235,"Duration":79,"Distance":null,"Amplitude":0.19,"AvgVelocity":null,"MaxVelocity":null,"Gain":null},{"Start":7029,"End":7109,"MarkerChange":6787,"LatencyFrameCount":3,"DurationFrameCount":1,"Latency":242,"Duration":80,"Distance":null,"Amplitude":0.13,"AvgVelocity":null,"MaxVelocity":null,"Gain":null},{"Start":9361,"End":9669,"MarkerChange":9275,"LatencyFrameCount":1,"DurationFrameCount":4,"Latency":86,"Duration":308,"Distance":null,"Amplitude":0.18,"AvgVelocity":null,"MaxVelocity":null,"Gain":null},{"Start":10394,"End":10548,"MarkerChange":10316,"LatencyFrameCount":1,"DurationFrameCount":2,"Latency":78,"Duration":154,"Distance":null,"Amplitude":0.06,"AvgVelocity":null,"MaxVelocity":null,"Gain":null},
   {"Start":1428,"End":1597,"MarkerChange":1190,"LatencyFrameCount":3,"DurationFrameCount":2,"Latency":238,"Duration":169,"Distance":null,"Amplitude":0.21,"AvgVelocity":null,"MaxVelocity":null,"Gain":null},{"Start":4392,"End":4472,"MarkerChange":4315,"LatencyFrameCount":1,"DurationFrameCount":1,"Latency":77,"Duration":80,"Distance":null,"Amplitude":0.15,"AvgVelocity":null,"MaxVelocity":null,"Gain":null},{"Start":5666,"End":5745,"MarkerChange":5431,"LatencyFrameCount":3,"DurationFrameCount":1,"Latency":235,"Duration":79,"Distance":null,"Amplitude":0.19,"AvgVelocity":null,"MaxVelocity":null,"Gain":null},{"Start":7029,"End":7109,"MarkerChange":6787,"LatencyFrameCount":3,"DurationFrameCount":1,"Latency":242,"Duration":80,"Distance":null,"Amplitude":0.13,"AvgVelocity":null,"MaxVelocity":null,"Gain":null},{"Start":9361,"End":9669,"MarkerChange":9275,"LatencyFrameCount":1,"DurationFrameCount":4,"Latency":86,"Duration":308,"Distance":null,"Amplitude":0.18,"AvgVelocity":null,"MaxVelocity":null,"Gain":null},{"Start":10394,"End":10548,"MarkerChange":10316,"LatencyFrameCount":1,"DurationFrameCount":2,"Latency":78,"Duration":154,"Distance":null,"Amplitude":0.06,"AvgVelocity":null,"MaxVelocity":null,"Gain":null}]
@@ -88,6 +91,8 @@ export class WebcamSnapshotComponent implements AfterViewInit {
   public testQualityIsGood: boolean;
   public testQualityPowerSpectrumMean: number;
   public testQualityMeanSdRelation: number;
+  public testQualityFrequency: number;
+  public testQualityChartSource: string;
 
 
   private document: any;
@@ -200,6 +205,7 @@ onResize(event){
       this.VIDEO_WIDTH, this.VIDEO_HEIGHT);
 
     this.stimuliService.initialize(this.drawingService);
+    this.dataCollectorService.clearGazeData();
 
   }
 
@@ -253,7 +259,7 @@ onResize(event){
     this.currentState = State.TESTQUALITY;
     this.showConfiguration = false;
     this.showStimuli = true;
-    this.showResults = false;
+    this.showTestQualitResults = false;
     this.resetStopWatch();
     this.stimuliService.runCalibration();
   }
@@ -424,9 +430,9 @@ async renderFrame() {
           break;
         case State.RESULTS:
           await this.proceedResults();
-          //this.proceedResults();
           break;
         case State.QUALITYRESULTS:
+            this.showTestQualityLoader = true;
             await this.proceedTestQuality();
             break;
 
@@ -460,6 +466,8 @@ async renderFrame() {
         this.testQualityIsGood = data['is_good'];
         this.testQualityPowerSpectrumMean = data['power_spectrum_mean'];
         this.testQualityMeanSdRelation = data['mean_sd_relation'];
+        this.testQualityFrequency = data['freq'];
+        this.testQualityChartSource = "data:image/png;base64," + data['image'];
 
         this.showTestQualityLoader = false;
         this.showTestQualitResults = true;
@@ -502,6 +510,9 @@ async renderFrame() {
         this.experimentDataFPS = data['result_freq'];
         console.log("Data FREQUENCY: " + data['result_freq'])
         console.log("Data fps: " + this.experimentDataFPS)
+        this.saccadeResultsIsGood = data['result_is_good']
+        this.saccadeResultsPowerSpectrumMean = data['power_spectrum_mean'];
+        this.saccadeResultsMeanSdRelation = data['mean_sd_relation'];
         this.showResultsLoader = false;
         this.showSaccadeResults = true;
       });
@@ -569,7 +580,7 @@ async renderFrame() {
 
   public async goInitialState() {
     await this.setupDevices();
-    //this.initializeServices();
+    this.initializeServices();
     this.experimentCanvasDiv.nativeElement.style["display"] = "block";
     this.testQualityDiv.nativeElement.style["display"] = "none";
     this.setUpConfigState();

@@ -34,6 +34,17 @@ export class StimuliService
   public initialize(drawingService : DrawingService)
   {
     this.drawingService = drawingService;
+
+    this.currentMarkerState = 0;
+    this.calibrationSaccadeCount = 0;
+    this.calibrationSaccadeLimit = 2;
+    this.calibrationFixationTime = 4000;
+    this.experimentSaccadeCount = 0;
+    this.experimentSaccadeLimit = 11;
+    this.experimentFixationTime = 1000;
+    this.currentIntervalId = null;
+    this.isCalibrationFinished = false;
+    this.isExperimentFinished = false;
   }
 
 
