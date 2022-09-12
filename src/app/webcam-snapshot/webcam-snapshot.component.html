@@ -50,8 +50,8 @@
     FPS Kamery: <span [innerHTML]="cameraFPS" ></span>
     FPS Przeglądarki: <span [innerHTML]="experimentDataFPS" ></span>
     Jakość Sygnału: <span [innerHTML]="saccadeResultsIsGood ? 'Dobra' : 'Słaba'" ></span>
-    Widmo Mocy X: <span [innerHTML]="saccadeResultsPowerSpectrumMean" ></span>
-    Średnia / SD: <span [innerHTML]="saccadeResultsMeanSdRelation" ></span>
+    Średnia Widma Mocy: <span [innerHTML]="saccadeResultsPowerSpectrumMean" ></span>
+    Średnia SNR: <span [innerHTML]="saccadeResultsMeanSdRelation" ></span>
   </h6>
   <div style="text-align: center;">
     <img #resultImage id="resultImage" alt="Result Image" [src]='chartSource' [width]="screenWidth / 2"
@@ -105,8 +105,8 @@
   <h6 style="text-align: center;" class="text-white-small"  [style.display]="showTestQualitResults ? 'block' : 'none'">
     <p>Jakość Sygnału: <span [innerHTML]="testQualityIsGood ? 'Dobra' : 'Słaba'" ></span></p>
     <p>
-       Widmo Mocy X: <span [innerHTML]="testQualityPowerSpectrumMean" ></span>
-       Średnia / SD: <span [innerHTML]="testQualityMeanSdRelation" ></span>
+       Średnia Widma Mocy: <span [innerHTML]="testQualityPowerSpectrumMean" ></span>
+       Średnia SNR: <span [innerHTML]="testQualityMeanSdRelation" ></span>
     </p>
     <p>
       FPS Kamery: <span [innerHTML]="cameraFPS" ></span>
