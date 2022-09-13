@@ -131,7 +131,7 @@ export class VideoService
 
             var positioningText = 'DOBRZE ' + eyeXDistance;
             this.videoCanvasContext.fillStyle = "green";
-            if(eyeXDistance > 57)
+            if(eyeXDistance > 75) //57
             {
               positioningText = 'ODDAL SIĘ ' + eyeXDistance;
               this.videoCanvasContext.fillStyle = "red";
