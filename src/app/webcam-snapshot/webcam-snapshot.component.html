@@ -113,8 +113,17 @@
       FPS Przeglądarki: <span [innerHTML]="testQualityFrequency" ></span>
     </p>
   </h6>
-  <div style="text-align: center;">
-    <img #resultImage id="testQualityResultImage" alt="Result Image" [src]='testQualityChartSource' [width]="screenWidth / 2"
-    [style.display]="showTestQualitResults ? 'block' : 'none'" style="margin-left: auto; margin-right: auto;" > <!--chartSource-->
+  <div style="text-align: center;" [style.display]="showTestQualitResults ? 'block' : 'none'">
+
+    <div style="text-align: center;" [style.display]="testQualityIsGood ? 'block' : 'none'">
+      <img #resultImage id="qualitySuccess" alt="Result Image" [src]='qualitySuccessSrc'
+      style="margin-left: auto; margin-right: auto;" > Jakość jest dobra, proszę wrócić do menu i rozpocząć badanie.
+    </div>
+    <div style="text-align: center;" [style.display]="testQualityIsGood ? 'none' : 'block'">
+      <img #resultImage id="qualityFailed" alt="Result Image" [src]='qualityFailedSrc'
+      style="margin-left: auto; margin-right: auto;" > Jakość jest zła, proszę spróbować poprpawić warunki w otoczeniu badania.
+    </div>
+
+
   </div>
 </div>

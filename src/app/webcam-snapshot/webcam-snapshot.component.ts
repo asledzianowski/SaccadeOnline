@@ -19,6 +19,10 @@ export class WebcamSnapshotComponent implements AfterViewInit {
   logoSrc = "../assets/eye_track_green.png"
   loaderImgSrc = "../assets/loader_white.gif"
   testChartSrc = "../assets/chart_mock.png"
+  qualitySuccessSrc = "../assets/quality_success.png"
+  qualityFailedSrc = "../assets/quality_failed.png"
+  qualityLampSrc = "../assets/quality_lamp.png"
+  qualityEyeSrc = "../assets/quality_eye.png"
 
   VIDEO_WIDTH = 640;
   VIDEO_HEIGHT = 480;
