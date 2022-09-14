@@ -129,16 +129,16 @@ export class VideoService
             var fontSize = eyeXDistance / 2.6;
             this.videoCanvasContext.font = 'bold ' + fontSize.toString() + 'px tahoma';
 
-            var positioningText = 'DOBRZE ' + eyeXDistance;
+            var positioningText = 'DOBRZE';
             this.videoCanvasContext.fillStyle = "green";
-            if(eyeXDistance > 75) //57
+            if(eyeXDistance > 75) // (not closer than ~65 cm) - elier 57 (not closer than ~80 cm)
             {
-              positioningText = 'ODDAL SIĘ ' + eyeXDistance;
+              positioningText = 'ODDAL SIĘ';
               this.videoCanvasContext.fillStyle = "red";
             }
             else if(eyeXDistance < 51)
             {
-              positioningText = 'PRZYBLIŻ SIĘ ' + eyeXDistance;
+              positioningText = 'PRZYBLIŻ SIĘ';
               this.videoCanvasContext.fillStyle = "red";
             }
 
