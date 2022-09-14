@@ -120,20 +120,35 @@
       style="margin-left: auto; margin-right: auto;" > Jakość jest dobra, proszę wrócić do menu i rozpocząć badanie.
     </div>
     <div style="text-align: center;" [style.display]="testQualityIsGood ? 'none' : 'block'">
+
       <p><img #resultImage id="qualityFailed" alt="Result Image" [src]='qualityFailedSrc'
-      style="margin-left: auto; margin-right: auto;" > Jakość nie jest najlepsza, proszę spróbować poprawić warunki
-      w otoczeniu badania.</p>
-      <p><img #resultImage id="qualityLamp" alt="Result Image" [src]='qualityLampSrc'
-      style="margin-left: auto; margin-right: auto;" > Proszę spróbować doświetlić miejsce przeprowadzania badania,
-      najlepiej używając górnego, mocniejszego źródła światła.</p>
-      <p><img #resultImage id="qualityEye" alt="Result Image" [src]='qualityEyeSrc'
-      style="margin-left: auto; margin-right: auto;" > Proszę spróbować skupić wzrok na pojawiających się punktach oraz
-      postarać się siedzieć nie ruchomo w trakcie badania.</p>
-      <p><img #resultImage id="qualityGlassesSrc" alt="Result Image" [src]='qualityGlassesSrc'
-      style="margin-left: auto; margin-right: auto;" > Jeżeli w trakcie badania były noszone okulary,
-      proszę je zdjąć i spróbować przeprowadzić badanie bez nich.</p>
+        style="margin-left: auto; margin-right: auto;" > Jakość nie jest najlepsza, proszę spróbować poprawić warunki
+        w otoczeniu badania.</p>
+
+      <table>
+        <tbody>
+            <tr>
+                <td><img #resultImage id="qualityLamp" alt="Result Image" [src]='qualityLampSrc'
+                  style="margin-left: auto; margin-right: auto;" ></td>
+                <td> Proszę spróbować doświetlić miejsce przeprowadzania badania,
+                  najlepiej używając górnego, mocniejszego źródła światła.</td>
+            </tr>
+            <tr>
+              <td><img #resultImage id="qualityEye" alt="Result Image" [src]='qualityEyeSrc'
+                style="margin-left: auto; margin-right: auto;" ></td>
+              <td> Proszę spróbować skupić wzrok na pojawiających się punktach oraz
+                postarać się siedzieć nie ruchomo w trakcie badania.</td>
+            </tr>
+            <tr>
+              <td><img #resultImage id="qualityGlassesSrc" alt="Result Image" [src]='qualityGlassesSrc'
+                style="margin-left: auto; margin-right: auto;" > </td>
+              <td> Jeżeli w trakcie badania były noszone okulary,
+                proszę je zdjąć i spróbować przeprowadzić badanie bez nich.</td>
+            </tr>
+        </tbody>
+      </table>
     </div>
 
-
   </div>
+
 </div>
