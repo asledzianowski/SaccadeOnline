@@ -121,7 +121,16 @@
     </div>
     <div style="text-align: center;" [style.display]="testQualityIsGood ? 'none' : 'block'">
       <img #resultImage id="qualityFailed" alt="Result Image" [src]='qualityFailedSrc'
-      style="margin-left: auto; margin-right: auto;" > Jakość jest zła, proszę spróbować poprpawić warunki w otoczeniu badania.
+      style="margin-left: auto; margin-right: auto;" > Jakość nie jest najlepsza, proszę spróbować poprawić warunki w otoczeniu badania.
+      <img #resultImage id="qualityLamp" alt="Result Image" [src]='qualityLampSrc'
+      style="margin-left: auto; margin-right: auto;" > Proszę spróbować doświetlić miejsce przeprowadzania badania,
+      najlepiej używając górnego, mocniejszego źródła światła.
+      <img #resultImage id="qualityEye" alt="Result Image" [src]='qualityEyeSrc'
+      style="margin-left: auto; margin-right: auto;" > Proszę spróbować skupić wzrok na pojawiających się punktach oraz
+      postarać się siedzieć nie ruchomo w trakcie badania.
+      <img #resultImage id="qualityGlassesSrc" alt="Result Image" [src]='qualityGlassesSrc'
+      style="margin-left: auto; margin-right: auto;" > Jeżeli w trakcie badania były noszone okulary,
+      proszę je zdjąć i spróbować przeprowadzić badanie bez nich .
     </div>
 
 

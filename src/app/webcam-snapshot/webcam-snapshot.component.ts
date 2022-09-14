@@ -23,6 +23,7 @@ export class WebcamSnapshotComponent implements AfterViewInit {
   qualityFailedSrc = "../assets/quality_failed.png"
   qualityLampSrc = "../assets/quality_lamp.png"
   qualityEyeSrc = "../assets/quality_eye.png"
+  qualityGlassesSrc = "../assets/quality_glasses.png"
 
   VIDEO_WIDTH = 640;
   VIDEO_HEIGHT = 480;
