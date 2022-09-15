@@ -108,8 +108,6 @@ export class DataCollectorService
           console.log(JSON.stringify(data['mean_sd_relation']));
           console.log("Frequency:")
           console.log(JSON.stringify(data['freq']));
-          console.log("Image Data:")
-          console.log(JSON.stringify(data['image']));
 
           resolve(data);
 

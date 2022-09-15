@@ -97,8 +97,6 @@ export class WebcamSnapshotComponent implements AfterViewInit {
   public testQualityPowerSpectrumMean: number;
   public testQualityMeanSdRelation: number;
   public testQualityFrequency: number;
-  public testQualityChartSource: string;
-
 
   private document: any;
   private documentElement: any;
@@ -472,7 +470,6 @@ async renderFrame() {
         this.testQualityPowerSpectrumMean = data['power_spectrum_mean'];
         this.testQualityMeanSdRelation = data['mean_sd_relation'];
         this.testQualityFrequency = data['freq'];
-        this.testQualityChartSource = "data:image/png;base64," + data['image'];
 
         this.showTestQualityLoader = false;
         this.showTestQualitResults = true;
