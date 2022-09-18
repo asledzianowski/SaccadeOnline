@@ -74,8 +74,8 @@ export class WebcamSnapshotComponent implements AfterViewInit {
   {"Start":1428,"End":1597,"MarkerChange":1190,"LatencyFrameCount":3,"DurationFrameCount":2,"Latency":238,"Duration":169,"Distance":null,"Amplitude":0.21,"AvgVelocity":null,"MaxVelocity":null,"Gain":null},{"Start":4392,"End":4472,"MarkerChange":4315,"LatencyFrameCount":1,"DurationFrameCount":1,"Latency":77,"Duration":80,"Distance":null,"Amplitude":0.15,"AvgVelocity":null,"MaxVelocity":null,"Gain":null},{"Start":5666,"End":5745,"MarkerChange":5431,"LatencyFrameCount":3,"DurationFrameCount":1,"Latency":235,"Duration":79,"Distance":null,"Amplitude":0.19,"AvgVelocity":null,"MaxVelocity":null,"Gain":null},{"Start":7029,"End":7109,"MarkerChange":6787,"LatencyFrameCount":3,"DurationFrameCount":1,"Latency":242,"Duration":80,"Distance":null,"Amplitude":0.13,"AvgVelocity":null,"MaxVelocity":null,"Gain":null},{"Start":9361,"End":9669,"MarkerChange":9275,"LatencyFrameCount":1,"DurationFrameCount":4,"Latency":86,"Duration":308,"Distance":null,"Amplitude":0.18,"AvgVelocity":null,"MaxVelocity":null,"Gain":null},{"Start":10394,"End":10548,"MarkerChange":10316,"LatencyFrameCount":1,"DurationFrameCount":2,"Latency":78,"Duration":154,"Distance":null,"Amplitude":0.06,"AvgVelocity":null,"MaxVelocity":null,"Gain":null}]
 
 
-  //Show face marker (configuration adjustments) on every 10 frame 
-  public faceMarkersShowOnFrameLimit : number = 10;
+  //Show face marker (configuration adjustments) on every 5 frame 
+  public faceMarkersShowOnFrameLimit : number = 5;
   public faceMarkersShowOnFrameCount : number = 0;
 
   public framesLeftTotal: number;
