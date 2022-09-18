@@ -46,6 +46,7 @@ export class FormComponent  {
         {
           this.fillWithFormData(formDataFromStorage);
         }
+      }
   }
 
   async onTypeSelectionChange()
