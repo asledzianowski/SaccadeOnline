@@ -37,19 +37,15 @@ export class FormComponent  {
       console.log("Form Data: " + JSON.stringify(this.dataCollectorService.formData));
       if(this.dataCollectorService.formData != undefined)
       {
-        this.id = this.dataCollectorService.formData['id'];
-        this.type = this.getTypeInt(this.dataCollectorService.formData['type']),
-        this.lateralization = this.getLaterationInt(this.dataCollectorService.formData['lateralization']),
-        this.phase = this.getPhaseInt(this.dataCollectorService.formData['phase']),
-        this.uprds = this.dataCollectorService.formData['uprds'];
-        this.email = this.dataCollectorService.formData['email'];
-        this.sex = this.dataCollectorService.formData['sex'] == "F" ? 0 : 1;
-        this.age = this.dataCollectorService.formData['age'];
-        this.visionDefect = this.dataCollectorService.formData['visionDefect'];
-        this.stress = this.dataCollectorService.formData['stress'];
-        this.mood = this.dataCollectorService.formData['mood'];
-
+        this.fillWithFormData(this.dataCollectorService.formData);
       }
+      else{
+        var formDataFromStorage = JSON.parse(localStorage.getItem('formData'));
+        console.log("Form Data From Storage : " + JSON.stringify(formDataFromStorage));  
+        if(formDataFromStorage != undefined)
+        {
+          this.fillWithFormData(formDataFromStorage);
+        }
   }
 
   async onTypeSelectionChange()
@@ -61,6 +57,21 @@ export class FormComponent  {
         this.uprds =undefined;
 
       }
+  }
+
+  fillWithFormData(formData)
+  {
+    this.id = formData['id'];
+    this.type = this.getTypeInt(formData['type']),
+    this.lateralization = this.getLaterationInt(formData['lateralization']),
+    this.phase = this.getPhaseInt(formData['phase']),
+    this.uprds = formData['uprds'];
+    this.email = formData['email'];
+    this.sex = formData['sex'] == "F" ? 0 : 1;
+    this.age = formData['age'];
+    this.visionDefect = formData['visionDefect'];
+    this.stress = formData['stress'];
+    this.mood = formData['mood'];
   }
 
   getFormData()
@@ -113,7 +124,7 @@ export class FormComponent  {
         "stress" : this.stress,
         "mood" : this.mood
       };
-
+      localStorage.setItem('formData', JSON.stringify(this.dataCollectorService.formData));
       this.router.navigate(['/camera']);
 
     }
