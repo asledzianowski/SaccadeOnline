@@ -596,6 +596,7 @@ async renderFrame() {
     this.initializeServices();
     this.experimentCanvasDiv.nativeElement.style["display"] = "block";
     this.testQualityDiv.nativeElement.style["display"] = "none";
+    this.resultsDiv.nativeElement.style["display"] = "none";
     this.setUpConfigState();
   }
 

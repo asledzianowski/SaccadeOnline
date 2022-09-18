@@ -17,14 +17,19 @@
       </button>
     </div>
     <div>
-    <button (click)='startSaccadeTest()' [style.width]="VIDEO_WIDTH + 'px'" class="btn btn-success"
-    style="margin-top: 5px;"> Rozpocznij badanie (Spacja)
-    </button>
-  </div>
-  <div>
+      <button (click)='startSaccadeTest()' [style.width]="VIDEO_WIDTH + 'px'" class="btn btn-success"
+      style="margin-top: 5px;"> Rozpocznij badanie (Spacja)
+      </button>
+    </div>
+    <div>
+      <button (click)='goInitialState()' [style.width]="VIDEO_WIDTH + 'px'" class="btn btn-success"
+      style="margin-top: 5px;"> Reset
+      </button>
+    </div>
+    <div>
     <button type="button" [routerLink]="'/form'" [style.width]="VIDEO_WIDTH + 'px'" class="btn btn-success"
       style="margin-top: 5px;"> Powrót</button>
-  </div>
+    </div>
 </div>
 
 <div #experimentCanvasDiv id="experimentCanvasDiv" class="center, experimentCanvasDiv" [style.display]="showStimuli ? 'block' : 'none'" >
