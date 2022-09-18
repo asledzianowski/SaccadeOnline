@@ -75,7 +75,7 @@ export class WebcamSnapshotComponent implements AfterViewInit {
 
 
   //Show face marker (configuration adjustments) on every 5 frame 
-  public faceMarkersShowOnFrameLimit : number = 5;
+  public faceMarkersShowOnFrameLimit : number = 3;
   public faceMarkersShowOnFrameCount : number = 0;
 
   public framesLeftTotal: number;
