@@ -489,6 +489,7 @@ async renderFrame() {
         this.showTestQualityLoader = false;
         this.showTestQualitResults = true;
 
+        this.resetPercentageCount();
         this.dataCollectorService.clearGazeData();
       });
 
@@ -532,7 +533,7 @@ async renderFrame() {
         this.saccadeResultsMeanSdRelation = data['mean_sd_relation'];
         this.showResultsLoader = false;
         this.showSaccadeResults = true;
-        this.isTotalPercantageSet = false;
+        this.resetPercentageCount();
       });
 
       console.log("HTML: " + JSON.stringify(this.saccadeResults));
@@ -577,7 +578,15 @@ async renderFrame() {
 
   getPercentage(partialValue, totalValue) {
     return (100 * partialValue) / totalValue;
- } 
+  }
+  
+  resetPercentageCount()
+  {
+    this.isTotalPercantageSet = true;
+    this.currentPercantage = -1;
+    this.totalPercantage = -1;
+
+  }
 
   public async logCalibrationData()
   {
