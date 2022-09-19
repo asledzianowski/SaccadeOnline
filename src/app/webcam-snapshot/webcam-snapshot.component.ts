@@ -105,6 +105,10 @@ export class WebcamSnapshotComponent implements AfterViewInit {
   error: any;
 
   private resultsTimerId : any = null;
+  private totalPercantage : number = 0;
+  private currentPercantage : number = 0;
+  private isTotalPercantageSet : boolean = false;
+
 
   paintCount : number = 0;
   startTime : number = 0.0;
@@ -528,6 +532,7 @@ async renderFrame() {
         this.saccadeResultsMeanSdRelation = data['mean_sd_relation'];
         this.showResultsLoader = false;
         this.showSaccadeResults = true;
+        this.isTotalPercantageSet = false;
       });
 
       console.log("HTML: " + JSON.stringify(this.saccadeResults));
@@ -540,6 +545,18 @@ async renderFrame() {
     this.zone.run(() => {
       this.framesLeftTotal = this.dataCollectorService.UncompletedCalibrationRequests.length +
       this.dataCollectorService.UncompletedExperimentRequests.length;
+
+      if(this.isTotalPercantageSet == false && this.totalPercantage != 0)
+      {
+        this.totalPercantage = this.framesLeftTotal;
+        this.isTotalPercantageSet = true;
+        this.currentPercantage = 100;
+      }
+      else
+      {
+        this.currentPercantage = this.getPercentage(this.framesLeftTotal, this.totalPercantage)
+      }
+
     });
 
     console.log("Left calibration requests: "
@@ -557,6 +574,10 @@ async renderFrame() {
         return false;
       }
   }
+
+  getPercentage(partialValue, totalValue) {
+    return (100 * partialValue) / totalValue;
+ } 
 
   public async logCalibrationData()
   {
