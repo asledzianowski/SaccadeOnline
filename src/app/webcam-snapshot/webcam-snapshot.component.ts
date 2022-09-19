@@ -582,7 +582,7 @@ async renderFrame() {
   
   resetPercentageCount()
   {
-    this.isTotalPercantageSet = true;
+    this.isTotalPercantageSet = false;
     this.currentPercantage = -1;
     this.totalPercantage = -1;
 
