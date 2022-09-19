@@ -48,7 +48,7 @@
   </button>
   <div #resultImage id="loaderDiv" [style.display]="showResultsLoader ? 'block' : 'none'">
     <img alt="Proszę czekać..." [src]='loaderImgSrc' style="margin-top: 20px;">
-    <p class="text-white">Analiza wyników, proszę czekać...(<span [innerHTML]="framesLeftTotal"></span>)</p>
+    <p class="text-white">Analiza wyników, proszę czekać...(<span [innerHTML]="currentPercantage"></span>%)</p>
   </div>
   <h6 style="text-align: center;" class="text-white-small"  [style.display]="showSaccadeResults ? 'block' : 'none'">
     Id Badania: <span [innerHTML]="saccadeResultsId" ></span>

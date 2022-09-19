@@ -106,7 +106,7 @@ export class WebcamSnapshotComponent implements AfterViewInit {
 
   private resultsTimerId : any = null;
   private totalPercantage : number = 0;
-  public currentPercantage : number = 0;
+  public currentPercantage : number = 100;
   private isTotalPercantageSet : boolean = false;
 
 
@@ -554,7 +554,7 @@ async renderFrame() {
       }
       else
       {
-        this.currentPercantage = this.getPercentage(this.framesLeftTotal, this.totalPercantage)
+        this.currentPercantage = Math.round(this.getPercentage(this.framesLeftTotal, this.totalPercantage))
       }
 
     });
