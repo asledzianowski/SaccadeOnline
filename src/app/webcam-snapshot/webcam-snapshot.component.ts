@@ -106,7 +106,7 @@ export class WebcamSnapshotComponent implements AfterViewInit {
 
   private resultsTimerId : any = null;
   private totalPercantage : number = 0;
-  private currentPercantage : number = 0;
+  public currentPercantage : number = 0;
   private isTotalPercantageSet : boolean = false;
 
 
