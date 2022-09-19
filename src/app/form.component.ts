@@ -132,6 +132,22 @@ export class FormComponent  {
 
   }
 
+  clearFormData()
+  {
+    this.id = undefined;
+    this.type = undefined;
+    this.lateralization = undefined;
+    this.phase = undefined;
+    this.uprds = undefined;
+    this.email = undefined;
+    this.sex = undefined;
+    this.age = undefined;
+    this.visionDefect = undefined;
+    this.stress = undefined;
+    this.mood = undefined;
+    localStorage.removeItem('formData');
+  }
+
   getTypeString(type : number)
   {
     if(type == 0) return "HC";
